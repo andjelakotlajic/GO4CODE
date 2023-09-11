@@ -1,0 +1,14 @@
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\bin\Debug\net6.0\Go4CodeDanI.exe
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\bin\Debug\net6.0\Go4CodeDanI.deps.json
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\bin\Debug\net6.0\Go4CodeDanI.runtimeconfig.json
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\bin\Debug\net6.0\Go4CodeDanI.dll
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\bin\Debug\net6.0\Go4CodeDanI.pdb
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\obj\Debug\net6.0\Go4CodeDanI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\obj\Debug\net6.0\Go4CodeDanI.AssemblyInfoInputs.cache
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\obj\Debug\net6.0\Go4CodeDanI.AssemblyInfo.cs
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\obj\Debug\net6.0\Go4CodeDanI.csproj.CoreCompileInputs.cache
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\obj\Debug\net6.0\Go4CodeDanI.dll
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\obj\Debug\net6.0\refint\Go4CodeDanI.dll
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\obj\Debug\net6.0\Go4CodeDanI.pdb
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\obj\Debug\net6.0\Go4CodeDanI.genruntimeconfig.cache
+C:\Users\DELL\OneDrive\Desktop\GO4CODE\Go4CodeDanI\Go4CodeDanI\obj\Debug\net6.0\ref\Go4CodeDanI.dll
