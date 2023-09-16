@@ -25,9 +25,9 @@ namespace TwitterApp.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tweet>>> GetTweets([FromQuery] string search)
+        public async Task<ActionResult<IEnumerable<TweetResponse>>> GetTweets([FromQuery] string search)
         {
-            var result = await _tweetService.GetTweets();
+            var result = await _tweetService.GetTweetsSearch(search);
             return Ok(result);
         }
 
@@ -36,7 +36,7 @@ namespace TwitterApp.Controllers
 
   
         [HttpPost]
-        public async Task<ActionResult<TweetPut>> CreateTweet(TweetPut tweet)
+        public async Task<ActionResult<TweetResponse>> CreateTweet(TweetResponse tweet)
         {
             var result = await _tweetService.CreateTweet(tweet);
             return Ok(result);

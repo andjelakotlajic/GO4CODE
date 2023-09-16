@@ -17,9 +17,9 @@ namespace TwitterApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<CommentDto>>> CreateComment(CommentDto comment)
+        public async Task<ActionResult<IEnumerable<CommentDto>>> CreateComment(int tweetId,CommentDto comment)
         {
-            var result = await _commentService.CreateComment(comment);  
+            var result = await _commentService.CreateComment(comment,tweetId);  
             return Ok(result);
         }
 

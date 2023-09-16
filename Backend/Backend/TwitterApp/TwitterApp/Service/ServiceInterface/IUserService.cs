@@ -7,7 +7,7 @@ namespace TwitterApp.Service.ServiceInterface
     {
        
             User CreateUser(UserDtoAdd user);
-            User GetUserByUsername(string username);
+            UserDto GetUserByUsername(string username);
             void DeleteUser(string username);
             bool UpdateUser(UserDtoPut user);
         

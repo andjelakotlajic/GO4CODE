@@ -12,6 +12,8 @@ namespace TwitterApp.Repository.Interface
 
         public Task<IEnumerable<Tweet>> GetTweets();
 
+        public Task<IEnumerable<TweetResponse>> GetTweetsSearch(String search);
+
         public Task<Tweet> Get(int id);
     }
 }

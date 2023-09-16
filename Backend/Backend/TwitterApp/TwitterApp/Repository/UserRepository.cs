@@ -97,7 +97,17 @@ namespace TwitterApp.Repository
             throw new NotImplementedException();
         }
 
-      
+        public int GetUserId(string username)
+        {
+            var user =  _context.Users.FirstOrDefault(u => u.UserName == username);
+            return user.Id;
         }
+
+        public string GetUserName(int userId)
+        {
+           var user = _context.Users.FirstOrDefault(u=> u.Id == userId);
+            return user.UserName;
+        }
+    }
     }
 

@@ -24,10 +24,10 @@ namespace TwitterApp.Service
             return _userRepository.CreateUser(_user);
             
         }
-        public User GetUserByUsername(string username)
+        public UserDto GetUserByUsername(string username)
         {
             var user = _userRepository.GetUserByUsername(username);
-                return user;
+                return _mapper.Map<UserDto>(user);
 
         }
 

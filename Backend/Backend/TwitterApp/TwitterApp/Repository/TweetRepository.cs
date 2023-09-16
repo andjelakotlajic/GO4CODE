@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TwitterApp.Dto.TweetD;
 using TwitterApp.Model;
 using TwitterApp.Repository.Interface;
 using static TwitterApp.Repository.UserRepository;
@@ -9,19 +10,25 @@ namespace TwitterApp.Repository
     {
         private readonly TwitterDbContext _context;
         private readonly DbSet<Tweet> _collection;
+        private readonly UserRepository _userRepository;
         public TweetRepository(TwitterDbContext context)
         {
             _context = context;
             _collection = _context.Tweets;
         }
 
-        public async Task< Tweet> CreateTweet(Tweet tweet)
+        public async Task<Tweet> CreateTweet(Tweet tweet)
         {
-            tweet.CreatedAt = DateTime.Now;
+            var NewTweet = new Tweet
+            {
+                UserId = tweet.UserId,
+                CreatedAt = DateTime.Now,
+                Content = tweet.Content
+              };
 
-            await _collection.AddAsync(tweet);
+            await _collection.AddAsync(NewTweet);
             await _context.SaveChangesAsync();
-            return tweet;
+            return NewTweet;
         }
 
 
@@ -40,6 +47,22 @@ namespace TwitterApp.Repository
         public async Task< IEnumerable<Tweet>> GetTweets()
         {
             return await _collection.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<IEnumerable<TweetResponse>> GetTweetsSearch(string search)
+        {
+            var query = _context.Tweets
+        .Where(t => t.Content.Contains(search))
+        .ToList();
+
+            var tweetDtos = query.Select(t => new TweetResponse
+            {
+                Content = t.Content,
+                UserName = _context.Users.FirstOrDefault(u => u.Id == t.UserId)?.UserName
+            });
+            
+
+            return tweetDtos;
         }
 
         public async Task<bool> UpdateTweet(Tweet tweet)

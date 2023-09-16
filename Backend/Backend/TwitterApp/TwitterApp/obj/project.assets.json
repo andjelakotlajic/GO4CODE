@@ -12129,11 +12129,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL\\OneDrive\\Desktop\\GO4CODE\\Backend\\TwitterApp\\TwitterApp\\TwitterApp.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\OneDrive\\Desktop\\GO4CODE\\GO4CODE GIT\\GO4CODE\\Backend\\Backend\\TwitterApp\\TwitterApp\\TwitterApp.csproj",
       "projectName": "TwitterApp",
-      "projectPath": "C:\\Users\\DELL\\OneDrive\\Desktop\\GO4CODE\\Backend\\TwitterApp\\TwitterApp\\TwitterApp.csproj",
+      "projectPath": "C:\\Users\\DELL\\OneDrive\\Desktop\\GO4CODE\\GO4CODE GIT\\GO4CODE\\Backend\\Backend\\TwitterApp\\TwitterApp\\TwitterApp.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL\\OneDrive\\Desktop\\GO4CODE\\Backend\\TwitterApp\\TwitterApp\\obj\\",
+      "outputPath": "C:\\Users\\DELL\\OneDrive\\Desktop\\GO4CODE\\GO4CODE GIT\\GO4CODE\\Backend\\Backend\\TwitterApp\\TwitterApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",

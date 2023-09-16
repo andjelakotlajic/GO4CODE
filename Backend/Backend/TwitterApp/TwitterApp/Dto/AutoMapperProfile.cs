@@ -13,9 +13,9 @@ namespace TwitterApp.Dto
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<User, UserDtoAdd>().ReverseMap();
             CreateMap<User, UserDtoPut>().ReverseMap();
-            CreateMap<Tweet, TweetPut>();
-            CreateMap<TweetPut, Tweet>();
+            CreateMap<Tweet, TweetPut>().ReverseMap();
             CreateMap<Comment,CommentDto>().ReverseMap();
+            CreateMap<Tweet,TweetResponse>().ReverseMap();
         }
     }
 }

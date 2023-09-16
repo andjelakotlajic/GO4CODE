@@ -10,6 +10,10 @@ namespace TwitterApp.Repository.Interface
 
         User GetUserByUsername(string username);
 
+        int GetUserId(string username);
+
+        string GetUserName(int userId);
+
 
         void DeleteUser(string username);
 

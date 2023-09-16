@@ -18,9 +18,16 @@ namespace TwitterApp.Repository
 
         public async Task<Comment> CreateComment(Comment comment)
         {
-            comment.CreatedTime = DateTime.Now;
+            var NewComment = new Comment
+            {
 
-            await _collection.AddAsync(comment);
+            CreatedTime = DateTime.Now,
+            User = comment.User,
+            TweetId = comment.TweetId,
+            CommentText = comment.CommentText
+
+        };
+            await _collection.AddAsync(NewComment);
             await _context.SaveChangesAsync();
             return comment;
         }

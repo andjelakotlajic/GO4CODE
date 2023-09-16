@@ -9,19 +9,34 @@ namespace TwitterApp.Service
     {
 
         private readonly IComment _commentRepository;
+        private readonly ITweet _tweetRepository;
+        private readonly IUser _userRepository;
         private readonly IMapper _mapper;
 
-        public CommentService(IComment commentRepository, IMapper mapper)
+        public CommentService(IComment commentRepository, IMapper mapper,ITweet tweet,IUser user)
         {
             _commentRepository = commentRepository;
+            _tweetRepository = tweet;
+            _userRepository = user;
             _mapper = mapper;
         }
 
-        public async Task<CommentDto> CreateComment(CommentDto comment)
+        public async Task<CommentDto> CreateComment(CommentDto comment,int tweetId)
         {
-            var _comment = _mapper.Map<Model.Comment>(comment);
-            var result = _commentRepository.CreateComment(_comment);
-            return _mapper.Map<CommentDto>(result);
+            var tweet = await _tweetRepository.Get(tweetId);
+            var user =  _userRepository.GetUserByUsername(_userRepository.GetUserName(comment.UserId));
+
+            if (tweet!=null && user!=null)
+            {
+                
+                var _comment = _mapper.Map<Model.Comment>(comment);
+                _comment.TweetId = tweetId;
+                _comment.User = user;
+                var result = await _commentRepository.CreateComment(_comment);
+                return _mapper.Map<CommentDto>(result);
+            }
+            return null;
+           
         }
 
         public async Task<bool> DeleteComment(int id)

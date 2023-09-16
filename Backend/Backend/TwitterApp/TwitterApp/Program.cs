@@ -86,6 +86,7 @@ builder.Services.AddScoped<IComment, CommentRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITweetService, TweetService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<UserManager<IdentityUser>>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
