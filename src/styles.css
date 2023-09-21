@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%;
+
+}
+body {
+     margin: 0; 
+     font-family: 'Courier New', Courier, monospace;
+     font-size: 20px; 
+    min-height: 100vh;
+    /* background-image: url(img/banner-5250177_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: 100vw 40vh; */
+    }
