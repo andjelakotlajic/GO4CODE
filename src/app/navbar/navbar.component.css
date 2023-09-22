@@ -24,6 +24,7 @@ mat-nav-list.list-horizontal {
   margin-right:5px ;
   cursor: pointer;
   font-size:45px;
+  height: 71%; 
   font-variation-settings:
   'FILL' 0,
   'wght' 400,
@@ -67,6 +68,28 @@ mat-nav-list.list-horizontal {
     border: none;
     cursor: pointer;
 }
+
+.dropdown-menu {
+  background-color: #f0f0f0; 
+  color: #333; 
+}
+.dropdown-menu a {
+  display: block;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc; 
+  text-decoration: none;
+  color: #333;
+  font-size: 20px;
+  font-family: monospace;
+}
+
+.dropdown-menu a:hover {
+  background-color: #ccc; 
+}
+
+
+
 
 
   

@@ -1,6 +1,6 @@
 
             <div class="icon-text-container">
-                <div class="search">
+                <div class="search" *ngIf="isAuthenticated">
                     <form action="#">
                         <input type="text"
                                placeholder=" Search tweets"
@@ -8,9 +8,13 @@
 
                     </form>
                 </div>
-                <span class="material-symbols-outlined">account_circle</span>
+                <div class="material-symbols-outlined" *ngIf="isAuthenticated" (click)="toggleMenu()" >account_circle
+                      <!-- Dodajte vaše stavke menija ovde -->
+                      
+                </div>
+                <button  (click)="logOut()"  *ngIf="isAuthenticated"><a >Logout</a></button>
             </div>
-<div style="display: flex;flex-direction: row;">
+<div style="display: flex;flex-direction: row;" *ngIf="isAuthenticated">
 <mat-toolbar color="secondary">
 	<mat-nav-list class="list-horizontal">
      <mat-list-item>
@@ -39,14 +43,8 @@
     </mat-list-item>
 
     <mat-list-item>
-      <button mat-menu-item  routerLink="tweet">Tweets</button>
+      <button mat-menu-item  >Tweets</button>
     </mat-list-item>
-
-
-    <mat-list-item>
-        <button mat-menu-item >Log out</button>
-      </mat-list-item>
-
 
   </mat-nav-list>
 </mat-toolbar>

@@ -1,10 +1,39 @@
-import { Component, ElementRef} from '@angular/core';
+import { Component, ElementRef, OnInit} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { RegisterComponent } from '../pages/register/register.component';
+import { Router } from '@angular/router';
+import { RegisterService } from '../service/register-service/register.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   searchValue: string = '';
+  isAuthenticated: boolean = false;
+  userSub: Subscription = new Subscription()
+  isMenuOpen: boolean = false; 
+
+  
+
+  constructor(private regService : RegisterService,private router : Router){}
+  
+
+  ngOnInit(): void {
+    this.userSub = this.regService.user.subscribe({
+      next: (data) => {
+        this.isAuthenticated = data ? true : false;
+      }
+    })
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen; 
+  }
+  logOut(): void  {
+   this.regService.logOut();
+  }
+
+
 }

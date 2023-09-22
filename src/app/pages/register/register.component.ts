@@ -61,7 +61,7 @@ export class RegisterComponent {
         let password = this.passwordLog;
         this.regService.login({username: user, password: password}).subscribe({
           next: (data: any) => {
-            this.router.navigate(['/tweets']);
+            this.router.navigate(['/tweet']);
           }
         })
       this.usernameLog='';
@@ -105,11 +105,10 @@ export class RegisterComponent {
       }
       if(this.invalidCount==-5){
         this.regService.register({
-          username: this.username, password: this.password, email: this.email, firstname: this.firstname, lastname: this.lastname,
+          username: this.username, password: this.password,  firstname: this.firstname, lastname: this.lastname,email: this.email,
           bio: ''
         }).subscribe({
           next: () => {
-            console.log("uspesno");
           },
           error: () => {
             console.log("meuspesno");
