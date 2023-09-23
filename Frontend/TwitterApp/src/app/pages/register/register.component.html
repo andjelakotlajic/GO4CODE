@@ -1,0 +1,62 @@
+
+<div class="container">
+  <input type="checkbox" id="flip">
+  <div class="cover">
+    <div class="front">
+      <span class="img"></span>
+    </div>
+    <div class="back">
+      <span class="img"></span>
+    </div>
+  </div>
+  <div class="forms">
+      <div class="form-content">
+        <div class="login-form">
+          <div class="title">Login Form</div>
+        <form action="#">
+          <div class="input-boxes">
+            <div class="input-box" [ngClass]="{'invalid-input': isUsernameLogInvalid}">
+              <input type="text" name="usernameLog" placeholder="username" id="username" required [(ngModel)]="usernameLog" >
+            </div>
+            <div class="input-box"[ngClass]="{'invalid-input': isPassLogInvalid}" >
+              <input type="password" name="passwordLog" placeholder="password" id="password" required [(ngModel)]="passwordLog">
+            </div>
+            <div class="button input-box">
+              <input type="submit"  value="Login" (click)="setMode('Login')" (click)="onSubmit()">
+            </div>
+            <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup</label></div>
+          </div>
+      </form>
+    </div>
+      <div class="signup-form">
+        <div class="title">Signup Form</div>
+      <form action="#">
+          <div class="input-boxes">
+            <div class="input-box" [ngClass]="{'invalid-input': isFirstnameInvalid}">
+              <input type="text" name="firstname" placeholder="First name *" required id="firstname" [(ngModel)]="firstname">
+            </div>
+            <div class="input-box" [ngClass]="{'invalid-input': isLastnameInvalid}">
+              <input type="text" name="lastname" placeholder="Last name *" required id="lastname" [(ngModel)]="lastname">
+            </div>
+            <div class="input-box" [ngClass]="{'invalid-input': isUsernameInvalid}">
+              <input type="text" name="username" placeholder="username *" required [(ngModel)]="username">
+            </div>
+            <div class="input-box" [ngClass]="{'invalid-input': isEmailInvalid}">
+              <input type="text" name="email" placeholder="example@mail.com *" required [(ngModel)]="email">
+            </div>
+            <div class="input-box" [ngClass]="{'invalid-input': isPasswordInvalid}">
+              <input type="password" name="password" placeholder="password *" required [(ngModel)]="password">
+            </div>
+            <div class="input-box" >
+              <input type="text" name="bio" placeholder="Enter your bio" required [(ngModel)]="bio">
+            </div>
+            <div class="button input-box">
+              <input type="submit" value="Signup" (click)="setMode('Signup')" (click)="onSubmit()" >
+            </div>
+            <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+          </div>
+    </form>
+  </div>
+  </div>
+  </div>
+</div>
