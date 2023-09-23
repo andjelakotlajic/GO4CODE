@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using TwitterApp.Dto;
 using TwitterApp.Dto.UserD;
 using TwitterApp.Model;
 using TwitterApp.Repository.Interface;
@@ -18,31 +19,40 @@ namespace TwitterApp.Service
             _mapper = mapper;
         }
 
-        public User CreateUser(UserDtoAdd user)
+        public async Task<User> CreateUser(UserDtoAdd user)
         {
             var _user = _mapper.Map<Model.User>(user);
-            return _userRepository.CreateUser(_user);
+            return await _userRepository.CreateUser(_user);
             
         }
-        public UserDto GetUserByUsername(string username)
-        {
-            var user = _userRepository.GetUserByUsername(username);
-                return _mapper.Map<UserDto>(user);
-
-        }
-
-        public void DeleteUser(string username)
-        {
-            _userRepository.DeleteUser(username);
-        }
-
-
-
-        public bool UpdateUser(UserDtoPut user)
+        public async Task<User> CreateUser(RegisterUserRequest user)
         {
             var _user = _mapper.Map<Model.User>(user);
-            _userRepository.UpdateUser(_user);
+            return await _userRepository.CreateUser(_user);
+
+        }
+        public async Task<UserDto> GetUserByUsername(string username)
+        {
+
+            var user = await _userRepository.GetUserByUsername(username);
+            return  _mapper.Map<UserDto>(user);
+
+        }
+
+        public async Task DeleteUser(string username)
+        {
+            await _userRepository.DeleteUser(username);
+        }
+
+
+
+        public async Task<bool> UpdateUser(UserDtoPut user)
+        {
+            var _user = _mapper.Map<Model.User>(user);
+            await   _userRepository.UpdateUser(_user);
             return true;
         }
+
+
     }
 }

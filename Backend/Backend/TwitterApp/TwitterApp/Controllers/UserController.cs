@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TwitterApp.Dto.TweetD;
 using TwitterApp.Dto.UserD;
 using TwitterApp.Model;
 using TwitterApp.Repository.Interface;
@@ -11,6 +12,7 @@ namespace TwitterApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class UserController : ControllerBase
     {
         
@@ -22,10 +24,10 @@ namespace TwitterApp.Controllers
         }
 
         [HttpGet("getUserByUsername/{username}")]
-        public async Task<IActionResult> GetUserByUsername(string username)
+        public async Task<ActionResult<UserDto>> GetUserByUsername(string username)
         {
 
-            var user = _userService.GetUserByUsername(username);
+            var user = await _userService.GetUserByUsername(username);
 
 
             if (user == null)
@@ -37,11 +39,11 @@ namespace TwitterApp.Controllers
 
 
         [HttpPost("Dodavanje novog korisnika")]
-        public IActionResult CreateUser(UserDtoAdd user)
+        public async Task<IActionResult> CreateUser(UserDtoAdd user)
         {
             try
             {
-                var NewUser = _userService.CreateUser(user);
+                var NewUser = await _userService.CreateUser(user);
                 if (NewUser == null)
                 {
                     return BadRequest("Korisnik nije validan");
@@ -61,8 +63,9 @@ namespace TwitterApp.Controllers
         {
             try
             {
+                var azurirano =  await _userService.UpdateUser(updateUser);
 
-                if (_userService.UpdateUser(updateUser))
+                if (azurirano)
                 {
                     return Ok("Korisnik je uspešno ažuriran.");
 
@@ -79,16 +82,16 @@ namespace TwitterApp.Controllers
 
 
         [HttpDelete("DeleteUser/{username}")]
-        public IActionResult DeleteUser(string username)
+        public async Task<IActionResult> DeleteUser(string username)
         {
             try
             {
-                var user = _userService.GetUserByUsername(username);
+                var user =  await _userService.GetUserByUsername(username);
                 if (user == null)
                 {
                     return NotFound("Korisnik nije pronađen.");
                 }
-                _userService.DeleteUser(username);
+                await _userService.DeleteUser(username);
                 return Ok("Korisnik je uspešno obrisan.");
             }
 

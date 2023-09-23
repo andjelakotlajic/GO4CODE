@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -7,6 +8,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using TwitterApp.Dto;
+using TwitterApp.Model;
+using TwitterApp.Service;
+using TwitterApp.Service.ServiceInterface;
 
 namespace TwitterApp.Controllers
 {
@@ -17,15 +21,18 @@ namespace TwitterApp.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
 
         public AuthController(
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration)
+            IConfiguration configuration, 
+            IUserService userService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -71,8 +78,10 @@ namespace TwitterApp.Controllers
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.Username
+                UserName = model.Username,
+                
             };
+
 
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
@@ -83,6 +92,8 @@ namespace TwitterApp.Controllers
 
             if (await _roleManager.RoleExistsAsync(Roles.User))
                 await _userManager.AddToRoleAsync(user, Roles.User);
+
+            await _userService.CreateUser(model);
 
             return Ok();
         }

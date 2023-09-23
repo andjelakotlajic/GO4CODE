@@ -192,7 +192,8 @@ namespace TwitterApp.Migrations
                         name: "FK_Favorites_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete:ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,7 +259,8 @@ namespace TwitterApp.Migrations
                         name: "FK_Comments_Tweets_TweetId",
                         column: x => x.TweetId,
                         principalTable: "Tweets",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -279,7 +281,8 @@ namespace TwitterApp.Migrations
                         name: "FK_TweetsLike_Tweets_TweetId",
                         column: x => x.TweetId,
                         principalTable: "Tweets",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

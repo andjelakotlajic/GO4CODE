@@ -17,5 +17,7 @@ namespace TwitterApp.Model
 
         public TwitterDbContext(DbContextOptions<TwitterDbContext> options
     ) : base(options) { }
+
+
     }
 }

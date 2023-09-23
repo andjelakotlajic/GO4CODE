@@ -1,4 +1,5 @@
-﻿using TwitterApp.Dto.UserD;
+﻿using TwitterApp.Dto;
+using TwitterApp.Dto.UserD;
 using TwitterApp.Model;
 
 namespace TwitterApp.Service.ServiceInterface
@@ -6,10 +7,11 @@ namespace TwitterApp.Service.ServiceInterface
     public interface IUserService
     {
        
-            User CreateUser(UserDtoAdd user);
-            UserDto GetUserByUsername(string username);
-            void DeleteUser(string username);
-            bool UpdateUser(UserDtoPut user);
+          public Task<User> CreateUser(UserDtoAdd user);
+          public Task<User> CreateUser(RegisterUserRequest user);
+        public Task<UserDto> GetUserByUsername(string username);
+           public Task DeleteUser(string username);
+           public Task<bool> UpdateUser(UserDtoPut user);
         
     }
 }

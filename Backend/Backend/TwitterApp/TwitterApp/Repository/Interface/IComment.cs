@@ -11,5 +11,7 @@ namespace TwitterApp.Repository.Interface
 
         public Task<Comment> GetComment(int id);
 
+        public Task<IEnumerable<Comment>> GetAllCommentsByTweetId(int id);
+
     }
 }

@@ -5,13 +5,13 @@ namespace TwitterApp.Service.ServiceInterface
 {
     public interface ITweetService
     {
-       public  Task<TweetResponse> CreateTweet(TweetResponse tweet);
+       public  Task<TweetsRequest> CreateTweet(TweetsRequest tweet);
        public Task<bool> UpdateTweet(TweetPut tweet);
 
         public Task<bool>  DeleteTweet (int id);
 
-       public Task<IEnumerable<TweetResponse>> GetTweets();
+       public Task<IEnumerable<TweetsResponse>> GetTweets(int userid);
 
-        public Task<IEnumerable<TweetResponse>> GetTweetsSearch(string search);
+        public Task<IEnumerable<TweetsRequest>> GetTweetsSearch(string search);
     }
 }

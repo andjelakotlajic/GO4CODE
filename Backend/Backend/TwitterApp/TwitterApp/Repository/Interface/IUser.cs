@@ -4,24 +4,24 @@ namespace TwitterApp.Repository.Interface
 {
     public interface IUser
     {
-        User CreateUser(User user);
+       public Task< User> CreateUser(User user);
 
-        bool UpdateUser(User user);
+      public Task<bool> UpdateUser(User user);
 
-        User GetUserByUsername(string username);
+      public Task<User> GetUserByUsername(string username);
 
-        int GetUserId(string username);
+       public Task< int> GetUserId(string username);
 
-        string GetUserName(int userId);
+    public Task<string> GetUserName(int userId);
 
 
-        void DeleteUser(string username);
+       public Task DeleteUser(string username);
 
         void FollowUser(User userToFollow);
 
         void UnfollowUser(User userToUnfollow);
 
-        IEnumerable<Tweet> GetTweets();
+       public Task<IEnumerable<Tweet>> GetTweets(int id);
 
         IEnumerable<Tweet> GetFavoriteTweets();
 

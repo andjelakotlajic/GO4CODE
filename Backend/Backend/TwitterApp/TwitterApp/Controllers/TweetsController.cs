@@ -22,21 +22,26 @@ namespace TwitterApp.Controllers
 
             _tweetService = tweetService;
         }
-
+        
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TweetResponse>>> GetTweets([FromQuery] string search)
+        public async Task<ActionResult<IEnumerable<TweetsRequest>>> GetTweets([FromQuery] string search)
         {
             var result = await _tweetService.GetTweetsSearch(search);
+            return Ok(result);
+        }
+        [HttpGet("byUserId/{userid}")]
+        public async Task<ActionResult<IEnumerable<TweetsResponse>>> GetTweets(int userid)
+        {
+            var result = await _tweetService.GetTweets(userid);
             return Ok(result);
         }
 
 
 
 
-  
         [HttpPost]
-        public async Task<ActionResult<TweetResponse>> CreateTweet(TweetResponse tweet)
+        public async Task<ActionResult<TweetsRequest>> CreateTweet(TweetsRequest tweet)
         {
             var result = await _tweetService.CreateTweet(tweet);
             return Ok(result);
@@ -49,6 +54,10 @@ namespace TwitterApp.Controllers
             var result = await _tweetService.DeleteTweet(id);
             return result == false ? NotFound() : Ok(result);
         }
+
+       
+
+
 
     }
 }

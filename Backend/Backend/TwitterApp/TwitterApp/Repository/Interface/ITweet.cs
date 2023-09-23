@@ -10,10 +10,11 @@ namespace TwitterApp.Repository.Interface
 
         public Task<bool> DeleteTweet(Tweet tweet);
 
-        public Task<IEnumerable<Tweet>> GetTweets();
+        public Task<IEnumerable<Tweet>> GetTweets(int userid);
 
-        public Task<IEnumerable<TweetResponse>> GetTweetsSearch(String search);
+        public Task<IEnumerable<TweetsRequest>> GetTweetsSearch(String search);
 
         public Task<Tweet> Get(int id);
+        public Task< IEnumerable<Tweet>> GetAllTweetsByUserId(int userId);
     }
 }

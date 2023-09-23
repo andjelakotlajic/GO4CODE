@@ -55,6 +55,16 @@ builder.Services.AddSwaggerGen(c => {
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "cors", builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    }
+    );
+}
+);
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<TwitterDbContext>()
     .AddDefaultTokenProviders();
@@ -82,11 +92,19 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<IUser, UserRepository>();
 builder.Services.AddScoped<ITweet, TweetRepository>();
-builder.Services.AddScoped<IComment, CommentRepository>();
+builder.Services.AddScoped<IComment, CommentRepository>(); 
+builder.Services.AddScoped<ITweetLike, TweetLikeRepository>();
+
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITweetService, TweetService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<ITweetLikeService, TweetLikeService>();
+
 builder.Services.AddScoped<UserManager<IdentityUser>>();
+builder.Services.AddScoped<TweetRepository>();
+builder.Services.AddScoped<CommentRepository>();
+
+
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
@@ -101,6 +119,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("cors");
 
 app.MapControllers();
 

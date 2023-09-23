@@ -235,7 +235,7 @@ namespace TwitterApp.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TweetId")
+                    b.Property<int>("TweetId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -310,13 +310,10 @@ namespace TwitterApp.Migrations
                     b.Property<DateTime>("Liketime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TweetId")
+                    b.Property<int>("TweetId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Tweet_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("User_id")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -433,15 +430,19 @@ namespace TwitterApp.Migrations
 
             modelBuilder.Entity("TwitterApp.Model.Comment", b =>
                 {
-                    b.HasOne("TwitterApp.Model.Tweet", null)
+                    b.HasOne("TwitterApp.Model.Tweet", "Tweet")
                         .WithMany("Comments")
-                        .HasForeignKey("TweetId");
+                        .HasForeignKey("TweetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TwitterApp.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Tweet");
 
                     b.Navigation("User");
                 });
@@ -464,9 +465,13 @@ namespace TwitterApp.Migrations
 
             modelBuilder.Entity("TwitterApp.Model.TweetLike", b =>
                 {
-                    b.HasOne("TwitterApp.Model.Tweet", null)
+                    b.HasOne("TwitterApp.Model.Tweet", "Tweet")
                         .WithMany("Likes")
-                        .HasForeignKey("TweetId");
+                        .HasForeignKey("TweetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tweet");
                 });
 
             modelBuilder.Entity("UserUser", b =>

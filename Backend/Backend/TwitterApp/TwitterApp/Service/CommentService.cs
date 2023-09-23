@@ -24,13 +24,13 @@ namespace TwitterApp.Service
         public async Task<CommentDto> CreateComment(CommentDto comment,int tweetId)
         {
             var tweet = await _tweetRepository.Get(tweetId);
-            var user =  _userRepository.GetUserByUsername(_userRepository.GetUserName(comment.UserId));
+            var user = await  _userRepository.GetUserByUsername(await _userRepository.GetUserName(comment.UserId));
 
             if (tweet!=null && user!=null)
             {
                 
                 var _comment = _mapper.Map<Model.Comment>(comment);
-                _comment.TweetId = tweetId;
+                _comment.Tweet =await _tweetRepository.Get(tweetId);
                 _comment.User = user;
                 var result = await _commentRepository.CreateComment(_comment);
                 return _mapper.Map<CommentDto>(result);

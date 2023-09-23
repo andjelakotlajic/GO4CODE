@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TwitterApp.Model;
 using TwitterApp.Repository.Interface;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TwitterApp.Repository
 {
@@ -18,18 +19,26 @@ namespace TwitterApp.Repository
 
         public async Task<Comment> CreateComment(Comment comment)
         {
-            var NewComment = new Comment
-            {
+            var user = await _context.Users.FirstOrDefaultAsync(u=>u.Id==comment.User.Id);
+            var existingTweet = await _context.Tweets.FirstOrDefaultAsync(t => t.Id == comment.Tweet.Id);
+  
 
-            CreatedTime = DateTime.Now,
-            User = comment.User,
-            TweetId = comment.TweetId,
-            CommentText = comment.CommentText
+            if (user != null && existingTweet!=null) {
+                var NewComment = new Comment
+                {
+                    CommentText = comment.CommentText,
+                    CreatedTime = DateTime.Now,
+                    TweetId = existingTweet.Id,
+                    UserId = user.Id
+                    
 
-        };
-            await _collection.AddAsync(NewComment);
-            await _context.SaveChangesAsync();
-            return comment;
+                };
+                await _collection.AddAsync(NewComment);
+                await _context.SaveChangesAsync();
+                return NewComment;
+            }
+            return null;
+            
         }
 
         public async Task<bool> DeleteComment(Comment comment)
@@ -37,12 +46,20 @@ namespace TwitterApp.Repository
             _collection.Remove(comment);
             await _context.SaveChangesAsync();
             return true;
+            
+        }
+
+        public async Task<IEnumerable<Comment>> GetAllCommentsByTweetId(int id)
+        {
+            return await _collection.AsNoTracking().Where(comments => comments.Tweet.Id == id).ToListAsync();
         }
 
         public async Task<Comment> GetComment(int id)
         {
             return await _collection.AsNoTracking().FirstOrDefaultAsync(comment => comment.Id == id);
         }
+
+        
 
         public async Task<Comment> UpdateComment(Comment comment)
         {

@@ -1,19 +1,25 @@
-﻿using TwitterApp.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using TwitterApp.Model;
 using TwitterApp.Repository.Interface;
+using static TwitterApp.Repository.TweetRepository;
 
 namespace TwitterApp.Repository
 {
     public class UserRepository : IUser
     {
         private readonly TwitterDbContext _context;
-        public UserRepository(TwitterDbContext context)
+        private readonly DbSet<User> _collection;
+        private readonly TweetRepository _tweetRepository;
+        public UserRepository(TwitterDbContext context,TweetRepository tweetRepository)
         {
             _context = context;
+            _collection = _context.Users;
+            _tweetRepository = tweetRepository;
         }
 
 
 
-        public  User CreateUser(User user)
+        public async Task<User> CreateUser(User user)
         {
             var NewUser = new User
             {
@@ -25,25 +31,48 @@ namespace TwitterApp.Repository
                 UserName = user.UserName,
                 Password = user.Password
             };
-            _context.Users.Add(NewUser);
-            _context.SaveChanges();
-            return user;
+           await _context.Users.AddAsync(NewUser);
+            await _context.SaveChangesAsync();
+            return NewUser;
         }
-        public User GetUserByUsername(string username)
+        public async Task<User> GetUserByUsername(string username)
         {
-            return _context.Users.FirstOrDefault(u => u.UserName == username);
+
+            var users =  _context.Users.FirstOrDefault(u => u.UserName == username);
+
+            if (users != null) {
+                var tweets = await _tweetRepository.GetAllTweetsByUserId(users.Id);
+                foreach(var tweet in tweets)
+                {
+                    users.Tweets.Add(tweet);
+                }
+                return users;
+            } 
+
+            
+            return null;
         }
-        public void DeleteUser(string username)
+        public async Task DeleteUser(string username)
         {
             var existingUser = _context.Users.FirstOrDefault(u => u.UserName == username);
+
+            var tweets = await _tweetRepository.GetAllTweetsByUserId(existingUser.Id);
+
+            if (tweets != null)
+            {
+                foreach (var tweet in tweets)
+                {
+                  await _tweetRepository.DeleteTweet(tweet);
+                }
+            }
 
             if (existingUser != null)
             {
                 _context.Users.Remove(existingUser);
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
             }
         }
-        public bool UpdateUser(User user)
+        public async Task<bool> UpdateUser(User user)
         {
 
             //_context.Users.Entry(user).State = EntityState.Modified;
@@ -53,11 +82,11 @@ namespace TwitterApp.Repository
             
             if (existingUser != null)
             {
-                existingUser = GetUserByUsername(existingUser.UserName);
+                existingUser = await GetUserByUsername(existingUser.UserName);
                 existingUser.FirstName = user.FirstName;
                 existingUser.LastName = user.LastName;
                 existingUser.Bio = user.Bio;
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return true;
             }
             return false;
@@ -84,9 +113,11 @@ namespace TwitterApp.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Tweet> GetTweets()
+        public async Task<IEnumerable<Tweet>> GetTweets(int id)
         {
-            throw new NotImplementedException();
+            var tweets = await _context.Tweets.Where(t => t.UserId == id).ToListAsync();
+            return tweets;
+
         }
 
 
@@ -97,17 +128,19 @@ namespace TwitterApp.Repository
             throw new NotImplementedException();
         }
 
-        public int GetUserId(string username)
+        public async Task<int> GetUserId(string username)
         {
             var user =  _context.Users.FirstOrDefault(u => u.UserName == username);
-            return user.Id;
+            var userid = user.Id;
+            return  userid;
         }
 
-        public string GetUserName(int userId)
+        public async Task<string> GetUserName(int userId)
         {
            var user = _context.Users.FirstOrDefault(u=> u.Id == userId);
-            return user.UserName;
+            return  user.UserName;
         }
+
     }
     }
 
