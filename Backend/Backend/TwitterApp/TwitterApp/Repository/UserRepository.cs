@@ -86,7 +86,7 @@ namespace TwitterApp.Repository
                 existingUser.FirstName = user.FirstName;
                 existingUser.LastName = user.LastName;
                 existingUser.Bio = user.Bio;
-                _context.SaveChangesAsync();
+               await _context.SaveChangesAsync();
                 return true;
             }
             return false;

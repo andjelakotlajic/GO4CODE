@@ -13,12 +13,14 @@ namespace TwitterApp.Service
         private readonly ITweet _tweetRepository;
         private readonly IUser _userRepository;
         private readonly IMapper _mapper;
+        private ITweetLike _tweetLike;
 
-        public TweetService(ITweet tweetRepository,IMapper mapper,IUser userRepository)
+        public TweetService(ITweet tweetRepository,IMapper mapper,IUser userRepository,ITweetLike tweetLike)
         {
             _tweetRepository = tweetRepository;
             _mapper = mapper;
             _userRepository = userRepository;
+            _tweetLike = tweetLike;
         }
         public async Task< TweetsRequest> CreateTweet(TweetsRequest tweet)
         {
@@ -45,8 +47,14 @@ namespace TwitterApp.Service
         public async Task<IEnumerable<TweetsResponse>> GetTweets(int userid)
         {
             var tweets = await _tweetRepository.GetTweets(userid);
-
-            return _mapper.Map<IEnumerable<TweetsResponse>>(tweets);
+            var tweetsmap =  _mapper.Map<IEnumerable<TweetsResponse>>(tweets);
+            foreach(var tweet in tweetsmap)
+            {
+                tweet.UserName = await _userRepository.GetUserName(userid);
+                tweet.numLikes = await _tweetLike.NumLikes(tweet.Id);
+            }
+            
+            return tweetsmap;
 
         }
 

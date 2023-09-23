@@ -58,6 +58,7 @@ namespace TwitterApp.Repository
 
         public async Task<IEnumerable<Tweet>> GetAllTweetsByUserId(int userId)
         {
+
             return await  _collection.AsNoTracking().Where(tweets => tweets.UserId == userId).ToListAsync();
         }
 

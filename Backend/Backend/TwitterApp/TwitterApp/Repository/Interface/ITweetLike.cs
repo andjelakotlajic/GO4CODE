@@ -10,5 +10,7 @@ namespace TwitterApp.Repository.Interface
 
         public Task<bool> IsLike(int tweetId,int userId);
         Task<bool> LikeTweet(TweetLike tweet);
+
+        public Task<int> NumLikes(int tweetId);
     }
 }

@@ -54,5 +54,18 @@ namespace TwitterApp.Repository
             return true;
 
         }
+
+        public async Task<int> NumLikes(int tweetId)
+        {
+            var brojlajkova = await _collection.Where(t => t.TweetId == tweetId).ToListAsync() ;
+
+            var brojac = 0;
+
+            foreach(var lajk in brojlajkova)
+            {
+                brojac++;
+            }
+            return brojac;
+        }
     }
 }
