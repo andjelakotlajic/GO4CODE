@@ -20,11 +20,13 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthInterceptorService } from './service/register-service/register-interceptor.service';
 import { AuthGuard } from '../../src/app/service/register-service/auth-guard.service';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
  const routes: Routes = [
   {path:'',redirectTo:'register',pathMatch:'full'},
-  {path:'register',component:RegisterComponent,pathMatch:'full'},
-  {path: 'tweet',component:TweetsComponent,canActivate: [AuthGuard]}
+  {path:'register',component:RegisterComponent},
+  {path: 'tweet',component:TweetsComponent,canActivate: [AuthGuard]},
+  {path: 'userProfile',component:UserProfileComponent,canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -33,6 +35,7 @@ import { AuthGuard } from '../../src/app/service/register-service/auth-guard.ser
     RegisterComponent,
     NavbarComponent,
     TweetsComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

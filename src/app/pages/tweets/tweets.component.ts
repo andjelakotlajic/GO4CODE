@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Tweet } from '../../model/tweet.model';
 import { TweetService } from 'src/app/service/tweet-service/tweet.service';
 import { Observable, Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: './tweets.component.html',
   styleUrls: ['./tweets.component.css']
 })
-export class TweetsComponent {
+export class TweetsComponent implements OnInit {
   tweets: Tweet[] = [];
   tweetUser: string = "Tweet creator";
   tweetcontext: string = "Sadrzaj tvita";
@@ -18,13 +18,16 @@ export class TweetsComponent {
   constructor(private tweetService: TweetService){}
   
   ngOnInit() {
-    var tweetParam = new Tweet(this.tweetUser, this.tweetcontext);
 
-    this.tweetService.createTweet(tweetParam).subscribe({
-      next: (data) => {
-        console.log(data);
-      }
-    })
+  }
+  getAllTweets(){
+    setTimeout(()=>{
+      this.tweetService.getAll().subscribe((responseData : Tweet[]) =>{
+        console.log(responseData);
+        this.tweets = responseData;
+      });
+    },1000)
+    
   }
 
 }

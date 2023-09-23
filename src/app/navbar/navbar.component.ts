@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   isAuthenticated: boolean = false;
   userSub: Subscription = new Subscription()
   isMenuOpen: boolean = false; 
-
+  username: string | null = null;
   
 
   constructor(private regService : RegisterService,private router : Router){}
@@ -24,8 +24,12 @@ export class NavbarComponent implements OnInit {
     this.userSub = this.regService.user.subscribe({
       next: (data) => {
         this.isAuthenticated = data ? true : false;
+        if (this.isAuthenticated) {
+          this.username = this.regService.getUsern();
+        }
       }
     })
+
   }
 
   toggleMenu() {

@@ -1,0 +1,45 @@
+<div id="con">
+    <div class="profile-icon">
+        <div  class="item"><span class="material-symbols-outlined">account_circle</span></div>
+        <div class="item">
+            <div class="follow">
+            <div ><span class="text-span">Followers</span></div>
+            <div><span class="text-span" class="text-num">5</span></div>
+        </div>
+        </div> 
+        <div class="item">
+            <div class="follow">
+            <div ><span class="text-span">Following</span></div>
+            <div ><span class="text-span" class="text-num">5</span></div>
+        </div>
+        </div> 
+    </div>
+    <div class="details-user">
+        <div class="user-info">
+            <div class="text">
+                <span>Username:</span>
+                <input type="text" id="username" [(ngModel)]="username" disabled>
+              </div>
+              <div class="text">
+                <span>First name:</span>
+                <input type="text" id="firstname" [(ngModel)]="firstname" [disabled]="!isEditMode">
+              </div>
+              <div class="text">
+                <span>Last name:</span>
+                <input type="text" id="lastname" [(ngModel)]="lastname" [disabled]="!isEditMode">
+              </div>
+              <div class="text">
+                <span>Email:</span>
+                <input type="email" id="email" [(ngModel)]="email" disabled>
+              </div>
+              <div class="text">
+                <span>Bio:</span>
+                <input type="text" id="bio" [(ngModel)]="bio" [disabled]="!isEditMode">
+              </div>
+        </div>
+        <div class="edit">
+            <button (click)="Update()" (click)="onSwitchMode()"><span style="font-size: 70px;">{{ isEditMode ? "Save" : "Edit" }}</span></button>
+        </div>
+    </div>
+    
+</div>

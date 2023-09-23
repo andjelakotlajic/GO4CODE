@@ -56,7 +56,6 @@ export class RegisterComponent {
         this.invalidCount--;
       }
       if(this.invalidCount<0){
-      console.log(this.invalidCount);
         let user = this.usernameLog;
         let password = this.passwordLog;
         this.regService.login({username: user, password: password}).subscribe({

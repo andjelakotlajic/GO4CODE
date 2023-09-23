@@ -9,27 +9,13 @@ import { Observable, catchError, map } from 'rxjs';
 
 
 export class TweetService {
+  readonly url = 'http://localhost:5187/api/Tweets/byUserId/1';
 
   constructor(private http: HttpClient) { }
-    fetchTweets() : Observable<Tweet[]> {
-      var url = 'http://localhost:5187/api/Tweets/byUserId/1';
-  
-      return this.http.get<Tweet[]>(url).pipe(
-        map(response => {
-          return response;
-        }),
-      );
-    }
-    createTweet(tweet: Tweet) : Observable<Tweet> {
-      var url = 'http://localhost:5187/api/Tweets/byUserId/1';
-      var body = tweet;
-  
-      return this.http.get<Tweet>(url).pipe(
-        map(response => {
-          return new Tweet(response.userName, response.context);
-        })
-      )
-  
+
+    getAll(): Observable<Tweet[]>{
+
+      return this.http.get<Tweet[]>(this.url);
     }
    }
 
