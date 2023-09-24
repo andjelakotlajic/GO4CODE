@@ -13,6 +13,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 
 import { TweetsComponent } from './pages/tweets/tweets.component';
@@ -49,7 +51,9 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     MatCardModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatDialogModule
+    
   ],
   providers: [
     {

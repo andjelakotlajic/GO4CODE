@@ -12,6 +12,8 @@ namespace TwitterApp.Service.ServiceInterface
         public Task<UserDto> GetUserByUsername(string username);
            public Task DeleteUser(string username);
            public Task<bool> UpdateUser(UserDtoPut user);
-        
+        public Task<int> GetUserId(string username);
+
+
     }
 }

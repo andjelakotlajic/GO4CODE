@@ -1,4 +1,13 @@
+<button (click)="openCreateTweetPopup()" class="button-create">Post</button>
+<div *ngIf="isCreateTweetPopupVisible" class="create-tweet-popup">
+  <div class="popup-content">
+    <textarea [(ngModel)]="createTweetData.content" rows="4" cols="50" placeholder="Whats happening?"></textarea>
+    <button (click)="closeCreateTweetPopup()">Cancel</button>
+    <button (click)="createTweet()">Ok</button>
+  </div>
+</div>
 <div class="tweet-cards-container">
+
   <mat-card class="tweet-card" *ngFor="let tweet of tweets">
     <mat-card-header>
       <mat-card-subtitle ><p style="display: inline-block; margin-right: 60px;">UserName: {{ tweet.userName }}</p>

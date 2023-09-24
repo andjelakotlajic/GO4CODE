@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
 using TwitterApp.Dto.TweetD;
+using TwitterApp.Migrations;
 using TwitterApp.Model;
 using TwitterApp.Repository;
 using TwitterApp.Repository.Interface;
 using TwitterApp.Service.ServiceInterface;
+using Tweet = TwitterApp.Model.Tweet;
 
 namespace TwitterApp.Service
 {
@@ -22,14 +24,17 @@ namespace TwitterApp.Service
             _userRepository = userRepository;
             _tweetLike = tweetLike;
         }
-        public async Task< TweetsRequest> CreateTweet(TweetsRequest tweet)
+        public async Task< TweetsResponse> CreateTweet(TweetsRequest tweet)
         {
             var _tweet = _mapper.Map<Tweet>(tweet);
             _tweet.UserId = await _userRepository.GetUserId(tweet.UserName);
             var createdTweet = await _tweetRepository.CreateTweet(_tweet);
-            var result = _mapper.Map<TweetsRequest>(createdTweet);
-            result.UserName = await _userRepository.GetUserName(_tweet.UserId);
-            return result;
+            var tweetsmap = _mapper.Map<TweetsResponse>(createdTweet);
+
+                tweetsmap.UserName =tweet.UserName;
+                tweetsmap.numLikes = await _tweetLike.NumLikes(createdTweet.Id);
+            
+            return tweetsmap;
 
         }
 

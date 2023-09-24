@@ -53,6 +53,9 @@ namespace TwitterApp.Service
             return true;
         }
 
-
+        public async Task<int> GetUserId(string username)
+        {
+            return await _userRepository.GetUserId(username);
+        }
     }
 }

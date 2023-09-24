@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TwitterApp.Dto.TweetD;
@@ -36,7 +37,11 @@ namespace TwitterApp.Controllers
             }
             return Ok(user);
         }
-
+        [HttpGet("getUserId/{username}")]
+        public async Task<ActionResult<int>> GetUserId(string username)
+        {
+            return await _userService.GetUserId(username);
+        }
 
         [HttpPost("Dodavanje novog korisnika")]
         public async Task<IActionResult> CreateUser(UserDtoAdd user)

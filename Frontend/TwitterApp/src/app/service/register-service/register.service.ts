@@ -63,9 +63,7 @@ loginAuto(){
 logOut(){
    localStorage.removeItem('user');
     this.user.next(null);
-    console.log('Navigating to /register...');
     this.router.navigate(['/register']);
-    console.log(this.router);
 }
 
 }
