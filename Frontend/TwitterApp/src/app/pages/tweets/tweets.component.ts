@@ -18,7 +18,7 @@ export class TweetsComponent implements OnInit {
   constructor(private tweetService: TweetService){}
   
   ngOnInit() {
-
+    this.getAllTweets();
   }
   getAllTweets(){
     setTimeout(()=>{
@@ -28,6 +28,25 @@ export class TweetsComponent implements OnInit {
       });
     },1000)
     
+  }
+  showDeleteConfirmation = false;
+
+  // ... Ostale metode ...
+
+  // Metoda za otvaranje potvrde brisanja
+  openDeleteConfirmation(): void {
+    this.showDeleteConfirmation = true;
+  }
+
+  // Metoda za potvrdu brisanja
+  confirmDelete(): void {
+    this.showDeleteConfirmation = false;
+    // Ovde možete postaviti logiku za brisanje
+  }
+
+  // Metoda za otkazivanje brisanja
+  cancelDelete(): void {
+    this.showDeleteConfirmation = false;
   }
 
 }

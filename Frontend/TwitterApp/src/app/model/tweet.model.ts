@@ -1,14 +1,16 @@
 export class Tweet {
     userName: string;
-    context: string;
-    // comments: Comment[] = []; 
-    // likes: number;
+    content: string;
+    numLikes:number;
+    createdAt:Date;
+    id:number;
 
-    constructor(userName: string, context:string) {
+    constructor(userName: string, content:string,numLikes:number,createdAt:Date,id:number) {
         this.userName = userName;
-        this.context = context;
+        this.content = content;
+        this.numLikes=numLikes;
+        this.createdAt=createdAt;
+        this.id = id;
     }
-    // export class Comment {
-    //     // Definicija komentara
-    //   }
+
 }

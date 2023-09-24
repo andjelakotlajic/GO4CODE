@@ -1,10 +1,34 @@
-<p>List of tweets</p>
-
-<mat-card class="tweet-card" *ngFor="let tweet of tweets">
-  <mat-card-header>
-    <mat-card-subtitle>{{ tweet.userName }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>{{ tweet.context }}</p>
-  </mat-card-content>
-</mat-card>
+<div class="tweet-cards-container">
+  <mat-card class="tweet-card" *ngFor="let tweet of tweets">
+    <mat-card-header>
+      <mat-card-subtitle ><p style="display: inline-block; margin-right: 60px;">UserName: {{ tweet.userName }}</p>
+        <p style="display: inline-block; margin-right: 30px;font-size: 12px;">{{ tweet.createdAt}}</p>
+      </mat-card-subtitle>
+  
+    </mat-card-header>
+    <mat-card-content>
+      <p class="content">{{ tweet.content}}</p>
+      <p style="display: none;">{{tweet.id}}</p>
+    </mat-card-content>
+  
+    <mat-card-content>
+      <div class="like-delete-container">
+      <div class="like-container">
+    <p class="material-symbols-outlined" style="display: inline-block; ">thumb_up</p>
+    <p style="display: inline-block;">{{ tweet.numLikes}}</p>
+  </div>
+  <div class="delete-container">
+    <button (click)="openDeleteConfirmation()">
+      <span class="material-symbols-outlined" style="display: inline-block;">delete</span>
+    </button>
+    <div class="delete-confirmation" *ngIf="showDeleteConfirmation">
+      <p>Da li ste sigurni da želite da obrišete ovaj tweet?</p>
+      <button (click)="confirmDelete()">Da</button>
+      <button (click)="cancelDelete()">Ne</button>
+    </div>
+  </div>
+  </div>
+    </mat-card-content>
+  
+  </mat-card>
+  </div>
