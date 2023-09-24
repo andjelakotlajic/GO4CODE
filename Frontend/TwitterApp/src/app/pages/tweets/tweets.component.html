@@ -18,14 +18,16 @@
     <p style="display: inline-block;">{{ tweet.numLikes}}</p>
   </div>
   <div class="delete-container">
-    <button (click)="openDeleteConfirmation()">
-      <span class="material-symbols-outlined" style="display: inline-block;">delete</span>
+    <button (click)="openDeleteConfirmation(tweet.id)">
+      <span class="material-symbols-outlined">delete</span>
     </button>
-    <div class="delete-confirmation" *ngIf="showDeleteConfirmation">
-      <p>Da li ste sigurni da želite da obrišete ovaj tweet?</p>
-      <button (click)="confirmDelete()">Da</button>
-      <button (click)="cancelDelete()">Ne</button>
-    </div>
+    <mat-card-content>
+      <div class="delete-confirmation" *ngIf="selectedTweetId === tweet.id">
+        <p>Da li ste sigurni da želite da obrišete ovaj tweet?</p>
+        <button (click)="confirmDelete()">Da</button>
+        <button (click)="cancelDelete()">Ne</button>
+      </div>
+    </mat-card-content>
   </div>
   </div>
     </mat-card-content>

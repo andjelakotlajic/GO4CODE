@@ -14,6 +14,7 @@ export class TweetsComponent implements OnInit {
   tweets: Tweet[] = [];
   tweetUser: string = "Tweet creator";
   tweetcontext: string = "Sadrzaj tvita";
+  selectedTweetId: number | null = null;
 
   constructor(private tweetService: TweetService){}
   
@@ -31,22 +32,20 @@ export class TweetsComponent implements OnInit {
   }
   showDeleteConfirmation = false;
 
-  // ... Ostale metode ...
-
-  // Metoda za otvaranje potvrde brisanja
-  openDeleteConfirmation(): void {
-    this.showDeleteConfirmation = true;
+  openDeleteConfirmation(tweetId: number): void {
+    this.selectedTweetId = tweetId;
   }
 
-  // Metoda za potvrdu brisanja
   confirmDelete(): void {
-    this.showDeleteConfirmation = false;
-    // Ovde možete postaviti logiku za brisanje
+    if (this.selectedTweetId !== null) {
+      this.tweetService.delete(this.selectedTweetId.toString()).subscribe();
+      this.getAllTweets();
+      this.selectedTweetId = null; 
+    }
   }
 
-  // Metoda za otkazivanje brisanja
   cancelDelete(): void {
-    this.showDeleteConfirmation = false;
+    this.selectedTweetId = null;
   }
 
 }
